@@ -74,7 +74,7 @@ Read the tasks file from the worktree:
 
 Search for `### TASK-NNN:` pattern.
 
-**Error:** Task not found → "TASK-NNN not found in specs/tasks.md"
+**Error:** Task not found → "TASK-NNN not found in specs/tasks/"
 
 ### Step 3: Validate Task is Workable
 
