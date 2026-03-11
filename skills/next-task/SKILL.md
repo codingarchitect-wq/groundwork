@@ -7,7 +7,7 @@ user-invocable: false
 
 # Next Task Skill
 
-Finds the next uncompleted task from `specs/tasks.md` and delegates execution to the `execute-task` skill.
+Finds the next uncompleted task from `specs/tasks/` (or `specs/tasks.md`) and delegates execution to the `execute-task` skill.
 
 ## Workflow
 
@@ -55,7 +55,7 @@ Parse the tasks to find the next task to work on:
 |-----------|----------|
 | No `specs/` directory | "No specs directory found. Run `/groundwork:design-product` to start defining your project." |
 | Missing tasks file | "Tasks file not found. Run `/groundwork:create-tasks` to generate tasks from your PRD and architecture." |
-| No tasks in file | "No tasks found in specs/tasks.md. The file may need to be regenerated with `/groundwork:create-tasks`." |
+| No tasks found | "No tasks found in specs/tasks/. The directory may need to be regenerated with `/groundwork:create-tasks`." |
 | All tasks complete | "All tasks complete! Consider running `/groundwork:source-product-specs-from-code` to update documentation or plan the next phase." |
 | Only blocked tasks | "All remaining tasks are blocked. Blocked tasks: [list]. Would you like to override and work on one anyway?" |
 | Parse error | "Could not parse tasks.md. Expected format: `### TASK-NNN: Title` with `**Status:**` field." |

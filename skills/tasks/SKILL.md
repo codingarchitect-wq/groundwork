@@ -15,7 +15,19 @@ Translates product specs and architecture into actionable implementation tasks.
   - `specs/product_specs.md` (PRD with EARS requirements)
   - `specs/architecture.md` (architecture with decision records)
   - `specs/design_system.md` (design system with DP/BRD/UXD decisions) - optional
-- **Output:** `specs/tasks.md` (task list with dependencies)
+- **Output:** `specs/tasks/` directory with per-milestone subdirectories:
+  ```
+  specs/tasks/
+  ├── _index.md          # Overview, milestone summary, dependency graph
+  ├── M1-core-auth/
+  │   ├── TASK-001.md
+  │   ├── TASK-002.md
+  │   └── TASK-003.md
+  ├── M2-upload/
+  │   ├── TASK-004.md
+  │   └── TASK-005.md
+  └── parking-lot.md     # Deferred tasks
+  ```
 
 ## Workflow Overview
 
@@ -274,7 +286,14 @@ Present the complete task list organized by milestone. Ask:
 > - Do the dependencies look right?
 > - Should any tasks be split or combined?"
 
-Iterate until user approves, then write to `specs/tasks.md`.
+Iterate until user approves, then write task files to `specs/tasks/`.
+
+**Output structure:**
+1. Create `specs/tasks/_index.md` with overview, milestone summary table, dependency graph, and critical path
+2. For each milestone, create a directory: `specs/tasks/M{N}-{slug}/` (e.g., `M1-core-auth/`)
+3. Write one file per task: `specs/tasks/M{N}-{slug}/TASK-{NNN}.md`
+4. Each task file is self-contained — includes all fields from the Required Task Format
+5. Write `specs/tasks/parking-lot.md` for deferred tasks (if any)
 
 **Progressive presentation:**
 - Present tasks one milestone at a time
