@@ -58,6 +58,16 @@ M2: [Name] (depends: M1)
 └── TASK-006 ──┴── TASK-007
 ` ``
 
+### Task Status
+
+| # | Task | Milestone | Status | Blocked by |
+|---|------|-----------|--------|------------|
+| TASK-001 | [Title] | M1 | Not Started | None |
+| TASK-002 | [Title] | M1 | Not Started | TASK-001 |
+| TASK-003 | [Title] | M1 | Not Started | TASK-001 |
+| TASK-004 | [Title] | M2 | Not Started | TASK-002, TASK-003 |
+| TASK-005 | [Title] | M2 | Not Started | TASK-004 |
+
 ### Critical Path
 
 TASK-001 → TASK-002 → TASK-003 → TASK-006 → TASK-007
