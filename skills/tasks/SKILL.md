@@ -307,14 +307,24 @@ Present the complete task list organized by milestone. Ask:
 Iterate until user approves, then write task files to `specs/tasks/`.
 
 **Output structure:**
-1. Create or update `specs/tasks/_index.md` with overview, milestone summary table, dependency graph, and critical path
+1. Create or update `specs/tasks/_index.md` with overview, milestone summary table, dependency graph, **task status table**, and critical path
 2. For each new milestone, create a directory: `specs/tasks/M{N}-{slug}/` (e.g., `M1-core-auth/`)
 3. Write one file per task: `specs/tasks/M{N}-{slug}/TASK-{NNN}.md`
 4. Each task file is self-contained — includes all fields from the Required Task Format
 5. Write or update `specs/tasks/parking-lot.md` for deferred tasks (if any)
 
+**Task status table in `_index.md`** (required — used by `next-task` to find work without reading every task file):
+```markdown
+### Task Status
+
+| # | Task | Milestone | Status | Blocked by |
+|---|------|-----------|--------|------------|
+| TASK-001 | Auth setup | M1 | Not Started | None |
+| TASK-002 | Login UI | M1 | Not Started | TASK-001 |
+```
+
 **If adding to existing tasks:**
-- Update `_index.md` — add the new milestone to the summary table, extend the dependency graph
+- Update `_index.md` — add new rows to the status table, add the new milestone to the summary table, extend the dependency graph
 - Continue task numbering from the highest existing task number
 - Do NOT regenerate or modify existing milestone directories or task files
 
