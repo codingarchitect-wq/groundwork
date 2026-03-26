@@ -203,6 +203,8 @@ Next failing test for next feature.
 | **Minimal** | One thing. "and" in name? Split it. | `test('validates email and domain and whitespace')` |
 | **Clear** | Name describes behavior | `test('test1')` |
 | **Shows intent** | Demonstrates desired API | Obscures what code should do |
+| **Precise** | Exact expected value or count | `toBeGreaterThanOrEqual(2)` — passes with 2 or 2000 |
+| **Organized** | Group by feature/behavior in separate `describe` blocks | One flat describe with 20 unrelated tests |
 
 ## What NOT to Test
 
@@ -214,14 +216,23 @@ Not everything benefits from TDD. Writing tests for these wastes budget and crea
 - Pure presentational components with zero logic (just HTML + Tailwind)
 - Tooltip styling, container classes, overflow attributes
 - That an icon renders as an SVG
+- Hardcoded formatted values from mock data — couple test to data AND format simultaneously
 
 **DO test:**
 - Conditional rendering (shows X when condition Y)
-- Computed values (formats currency, calculates percentage)
+- Computed values (formats currency, calculates percentage) — use the same formatter the component uses, don't hardcode strings
 - User interactions (click, keyboard, filter, sort, pagination)
+- Interaction chains — operating a control (slider, filter, toggle) produces a visible output change
 - State transitions (toggle, edit mode, selection)
-- Edge cases (empty data, zero values, overflow)
+- Edge cases (empty data, zero values, null props, missing context providers, overflow)
 - Business rules (color thresholds, frequency detection, amortization math)
+- Loading and async states (skeleton → loaded transition)
+
+**Don't:**
+- Assert on CSS class names (`className.toMatch(/text-green-500/)`) as a proxy for conditional logic — test the decision via data attributes, computed styles, or accessible roles, not Tailwind strings
+- Use loose assertions (`toBeGreaterThanOrEqual(2)`) that pass with any value — assert exact counts
+- Test only element existence for interactive components — test that the interaction changes output
+- Dump all tests in one flat `describe` — group by feature/behavior section
 
 **Rule of thumb:** If the test would only fail when someone intentionally changes the UI, it's not testing behavior — it's preventing change. Delete it.
 
@@ -535,6 +546,11 @@ const mockDb = {
 - Mock setup is >50% of test code
 - `mockResolvedValue()` when real code returns a stream
 - Mocking "just to be safe"
+- `className.toMatch(/tailwind-class/)` — testing CSS strings instead of behavior
+- Hardcoded formatted strings from mock data (`expect(screen.getByText('19,042.51 €'))`)
+- `toBeGreaterThanOrEqual(N)` — loose assertion that can't catch regressions
+- Testing slider/button exists without testing that it changes output
+- 15+ tests in one flat `describe` block with no grouping
 
 ## Final Rule
 
